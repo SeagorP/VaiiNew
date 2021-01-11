@@ -1,0 +1,33 @@
+
+div.head {
+    background-image: linear-gradient(#CCC, #FFF);
+    border-top: 2px solid #00247d;
+    
+}
+
+div.privitanie {
+    color: #00247d;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+img.logo {
+    width: 100%;
+}
+
+div.prihlasenie {
+    padding: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 20px;
+    color: rgb(209, 209, 209);
+    background-color: #00247d;
+    border-radius: 10px;
+}
+div.prihlasenie:hover {
+    background: #0637b3;
+}
+
+a.nemaUcet {
+    font-size: 12px;
+}
