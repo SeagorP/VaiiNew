@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+
+        
+        
+        <script src="app.js"></script>
+        <script src="Hlavicka/hlavicka.js"></script>
+        <script src="Login/register.js"></script>
+
+        <link rel="stylesheet" href="index.css" type="text/css">
+        <link rel="stylesheet" href="Hlavicka/hlavicka.css" type="text/css">
+		
+        <link rel="shortcut icon" href="Styles/Image/fawicon.png">
+        <title>REMP s.r.o. - Home</title>
+	
+	</head>
+	<body ng-app="mojWeb">
+		<!-- BOOTSTRAP -->
+
+        <!--
+            Extra small
+            <576px	Small
+            ≥576px	Medium
+            ≥768px	Large
+            ≥992px	X-Large
+            ≥1200px	XX-Large
+            ≥1400px
+
+            .container	    100%	540px	720px	960px	1140px	1320px
+            .container-sm	100%	540px	720px	960px	1140px	1320px
+            .container-md	100%	100%	720px	960px	1140px	1320px
+            .container-lg	100%	100%	100%	960px	1140px	1320px
+            .container-xl	100%	100%	100%	100%	1140px	1320px
+            .container-xxl	100%	100%	100%	100%	100%	1320px
+            .container-fluid	100%	100%	100%	100%	100%	100%
+         -->
+		 
+		 <!-- Hlavicka -->
+         <div id="hlavicka" ng-controller="hlavickaCTRL"></div>
+         <div ng-view></div>
+         <div> mega text </div>
+	</body>
+</html>
