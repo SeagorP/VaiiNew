@@ -1,10 +1,31 @@
 
-<div ng-controller="regCTRL">
-    <input class="name" type="text" ng-model="name" required minlength="4" maxlength="12"></br>
-    <input class="password" type="password" required minlength="4" maxlength="12" ng-model="password"></br>
-    <a ng-click="klikPrihlasit()">Prihlásiť</a></br>
-    <a ng-click="klikReg()">Ešte nemate učet ?</a>
-
-    {{ uzivatel.meno }}
-
+<div ng-controller="regCTRL" class="row">
+    <h1 class="col-12 text-center loginText"> Prihlásenie </h1>
+    <div class="text-center col-md-3 col-sm-6 col-10 login">
+        <div class="col-12">Uživatelské meno:</div>
+        <input class="name text-center" type="text" ng-model="name" required minlength="4" maxlength="16"><br>
+        <div class="col-12">Heslo:</div>
+        <input class="password text-center" type="password" required minlength="4" maxlength="16" ng-model="password"><br>
+        <br>
+        <h5><a ng-click="klikPrihlasit()" class="butPrihlasit">Prihlásiť</a></h5>
+        <div ng-if="zobrazEror == true" class="error">Chybné údaje</div>
+        <a href="#!/register">Ešte nemate učet ?</a>
+    </div>
+    <div class="col-sm-10 col-11 loginText text-justify loginText">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla Lorem
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerc
+        <!--{{ uzivatel.meno }}-->
+        <h1>Výhody prihlásenia</h1>
+        <UL>
+            <LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI>
+            <LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI><LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI><LI>Reversion s.r.o</LI>
+        </UL>
+    </div>
 </div>
+<br>

@@ -1,5 +1,6 @@
 regCTRL = function($scope, $http) {
     $scope.uzivatel = angular.fromJson(sessionStorage.uzivatel);
+    $scope.zobrazEror = false;
 
     $scope.klikPrihlasit = function() {
         console.log($scope.name);
@@ -16,9 +17,14 @@ regCTRL = function($scope, $http) {
             data: $scope.pdata,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(value) {
-            $scope.uzivatel = value.data;
-            sessionStorage.uzivatel = angular.toJson($scope.uzivatel);
-            console.log(value);
+            if (value.data == null) {
+                $scope.zobrazEror = true;
+            } else {
+                $scope.uzivatel = value.data;
+                sessionStorage.uzivatel = angular.toJson($scope.uzivatel);
+                $scope.zobrazEror = false;
+                console.log(value);
+            }
         });
     }
 }
