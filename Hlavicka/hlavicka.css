@@ -2,7 +2,6 @@
 div.head {
     background-image: linear-gradient(#CCC, #FFF);
     border-top: 2px solid #00247d;
-    
 }
 
 div.privitanie {
@@ -17,12 +16,12 @@ img.logo {
 
 div.prihlasenie {
     padding: 5px;
-    text-decoration: none;
     margin-top: 20px;
     font-size: 20px;
-    color: rgb(209, 209, 209);
+    color: white;
     background-color: #00247d;
     border-radius: 10px;
+    text-decoration: none;
 }
 div.prihlasenie:hover {
     background: #0637b3;
@@ -30,4 +29,24 @@ div.prihlasenie:hover {
 
 a.nemaUcet {
     font-size: 12px;
+}
+
+div.menu {
+    margin-top: 15px;
+    padding: 5px;
+    margin: auto;
+    width: 100%;
+
+    background-color: #fc741c;
+    border-radius: 10px;
+}
+
+a.menuPrvok {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a.menuPrvok:hover {
+    color:  #0637b3;
 }
