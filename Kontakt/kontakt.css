@@ -9,3 +9,7 @@ div.popis {
     color:#00247d;
     background-color: #f1f1f1;
 }
+
+i.icon {
+    cursor: pointer;
+}

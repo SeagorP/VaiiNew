@@ -3,3 +3,35 @@
 /* |||||||||||||||||||||||||Registracia|||||||||||||||||||||||||| */
 
 /* |||||||||||||||||||||||||Prihlasenie|||||||||||||||||||||||||| */
+div.login {
+    color: white;
+    background-image: linear-gradient(#00247d, rgb(0, 6, 85));
+    border-top: solid #fc741c 5px;
+    border-bottom: solid #fc741c 5px;
+    margin: auto;
+}
+
+a.butPrihlasit {
+    background-color: #fc741c;
+    padding: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+
+a.butPrihlasit:hover {
+    cursor: pointer;
+    background-color:  #db7b3b;
+}
+
+div.loginText {
+    margin: auto; 
+}
+
+.loginText {
+    color: #00247d;
+}
+
+.error {
+    color: red;
+}

@@ -1,7 +1,7 @@
 
 div.head {
     background-image: linear-gradient(#CCC, #FFF);
-    border-top: 2px solid #00247d;
+    border-bottom: 5px solid #00247d;
 }
 
 div.privitanie {
@@ -36,6 +36,7 @@ div.menu {
     padding: 5px;
     margin: auto;
     width: 100%;
+    margin-bottom: 5px;
 
     background-color: #fc741c;
     border-radius: 10px;

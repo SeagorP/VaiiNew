@@ -41,21 +41,21 @@
                 <textarea rows="5" class="col-12" ng-model = "item.text"></textarea>
             </div>
 
-            <h2><i ng-if = "editing == -1" ng-click="zmazData(item)" class="far fa-trash-alt"></i>
-            <i ng-if = "editing == -1" ng-click="saveBefUpd(item)" class="fas fa-edit"></i>
-            <i ng-if = "item.id_obsah == editing" ng-click="upravData(item)" class="fas fa-edit"></i>
-            <i ng-if = "item.id_obsah == editing" ng-click="closeUpd(item)" class="fas fa-times"></i></h2>
+            <h2><i ng-if = "editing == -1" ng-click="zmazData(item)" class="far fa-trash-alt icon"></i>
+            <i ng-if = "editing == -1" ng-click="saveBefUpd(item)" class="fas fa-edit icon"></i>
+            <i ng-if = "item.id_obsah == editing" ng-click="upravData(item)" class="fas fa-edit icon"></i>
+            <i ng-if = "item.id_obsah == editing" ng-click="closeUpd(item)" class="fas fa-times icon"></i></h2>
         </div>
 
         <div>
-            <h2><i ng-if = "editing == -1" ng-click="pridaj()" class="fas fa-plus"></i></h2>
+            <h2><i ng-if = "editing == -1" ng-click="pridaj()" class="fas fa-plus icon"></i></h2>
             <div ng-if = "add == true" class="row">
                 <input class="col-12" ng-model = "newPopis">
                 <textarea rows="5" class="col-12" ng-model = "newText"></textarea>
                 
                 <h2>
-                    <i ng-click="vlozDb(newPopis, newText)" class="far fa-save"></i>
-                    <i ng-click="pridaj()" class="fas fa-times"></i>
+                    <i ng-click="vlozDb(newPopis, newText)" class="far fa-save icon"></i>
+                    <i ng-click="pridaj()" class="fas fa-times icon"></i>
                 </h2>
             </div>
         </div>
