@@ -1,0 +1,98 @@
+<div ng-controller="kontCTRL" class="kontakt">
+    <div>
+        <img class="col-12" src="Styles/titleKontakt.png" alt="Title kontakt">
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12 text-center">
+            <!-- k tomuto ccs je v pate (nadpis)-->
+            <br>
+            <div class="col-12 nadpis">Sídlo:</div>
+            <div class="col-12">REMP s.r.o,</div>
+            <div class="col-12">Rozkvet 2122/61,</div>
+            <div class="col-12">Pov. Bystrica 01701</div> 
+            <br>
+            <div class="col-12 nadpis">Kontakt:</div>
+            <div class="col-12 nadpis">Tel. č:</div>
+            <div class="col-12">0942 512 58,</div>
+            <div class="col-12 nadpis">E-mail:</div>
+            <div class="col-12">remp@gmail.com,</div>
+            <div class="col-12">majitel@remp.sk</div> 
+            <br>
+            <div class="col-12 nadpis">Majitel:</div>
+            <div class="col-12">Rudolf Zelený,</div>
+            <div class="col-12">rudolf.zeleny@gmail.com</div> 
+        </div>
+        <div class="col-md-6 col-12 text-center">
+            <img class="sidlo" src="Styles/sidlo.png" alt="Sidlo firmy">
+        </div>
+    </div>
+    <div class="col-12 text-md-left text-center popis">
+        <br>
+
+        <div ng-repeat="item in obsah" class="text-justify">
+            <br>
+            <div ng-if = "item.id_obsah != editing">
+                <h1>{{ item.popis }}</h1>
+                {{ item.text }}
+            </div>
+
+            <div ng-if = "item.id_obsah == editing" class="row">
+                <input class="col-12" ng-model = "item.popis">
+                <textarea rows="5" class="col-12" ng-model = "item.text"></textarea>
+            </div>
+
+            <h2><i ng-if = "editing == -1" ng-click="zmazData(item)" class="far fa-trash-alt"></i>
+            <i ng-if = "editing == -1" ng-click="saveBefUpd(item)" class="fas fa-edit"></i>
+            <i ng-if = "item.id_obsah == editing" ng-click="upravData(item)" class="fas fa-edit"></i>
+            <i ng-if = "item.id_obsah == editing" ng-click="closeUpd(item)" class="fas fa-times"></i></h2>
+        </div>
+
+        <div>
+            <h2><i ng-if = "editing == -1" ng-click="pridaj()" class="fas fa-plus"></i></h2>
+            <div ng-if = "add == true" class="row">
+                <input class="col-12" ng-model = "newPopis">
+                <textarea rows="5" class="col-12" ng-model = "newText"></textarea>
+                
+                <h2>
+                    <i ng-click="vlozDb(newPopis, newText)" class="far fa-save"></i>
+                    <i ng-click="pridaj()" class="fas fa-times"></i>
+                </h2>
+            </div>
+        </div>
+        <!--<br>
+        <div>
+            <h1>O nás</h1>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla Lorem
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla Lorem
+        </div>
+        <br>
+        <h1>Zamestnanci</h1>
+        Sme malá spoločnosť počet našich zamestnancov nepresahuje 20 ludí, a to považujeme za našu hlavnú výhodu. Náš kolektív sa navzajom pozná a organizujeme rôzne teambuildingové
+        akcie, napríklad:
+        <UL>
+            <LI>Grilovačky</LI>
+            <LI>Posedenie</LI>
+            <LI>Teambuildingové akcie</LI>
+        </UL>
+        Na tomto si naša firma zakladá pretože vieme že práca luďí ktorý sa navzájom nepoznajú je ako hovorí naše slovenské príslovie "Práca chvatná málo platná.". 
+        <br>
+        <h1>História firmy</h1>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla Lorem
+        <br>
+        <h1>Naši partnery</h1>
+        <UL>
+            <LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI>
+            <LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI><LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI><LI>Reversion s.r.o</LI>
+            <LI>TopMaterial a.s.</LI>
+            <LI>SvetloPreVasDomov s.r.o</LI>
+            <LI>Reversion s.r.o</LI>
+        </UL>
+    -->
+    </div>
+</div>

@@ -1,0 +1,22 @@
+
+div.info {
+    background-color: #00247d;
+    color: white;
+    border-top: 4px solid #fc741c;
+}
+
+div.tvorca {
+    font-weight: bold;
+    color: #00247d;
+    padding: 3px;
+    border-top: 2px solid #fc741c;
+}
+
+img.majitel {
+    width:200px;
+    height: 200px;
+}
+
+div.nadpis {
+    color: #fc741c;
+}
