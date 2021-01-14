@@ -1,24 +1,23 @@
 <div ng-controller="kontCTRL" class="kontakt">
     <div>
-        <img class="col-12" src="Styles/titleKontakt.png" alt="Title kontakt">
+        <img class="obrazokKontakt" src="Styles/titleKontakt.png" alt="Title kontakt">
     </div>
     <div class="row">
-        <div class="col-md-6 col-12 text-center">
-            <!-- k tomuto ccs je v pate (nadpis)-->
+        <div class="col-md-6 col-12 text-center textBlue">
             <br>
-            <div class="col-12 nadpis">Sídlo:</div>
+            <div class="col-12 textOrange">Sídlo:</div>
             <div class="col-12">REMP s.r.o,</div>
             <div class="col-12">Rozkvet 2122/61,</div>
             <div class="col-12">Pov. Bystrica 01701</div> 
             <br>
-            <div class="col-12 nadpis">Kontakt:</div>
-            <div class="col-12 nadpis">Tel. č:</div>
+            <div class="col-12 textOrange">Kontakt:</div>
+            <div class="col-12 textOrange">Tel. č:</div>
             <div class="col-12">0942 512 58,</div>
-            <div class="col-12 nadpis">E-mail:</div>
+            <div class="col-12 textOrange">E-mail:</div>
             <div class="col-12">remp@gmail.com,</div>
-            <div class="col-12">majitel@remp.sk</div> 
+            <div class="col-12 ">majitel@remp.sk</div> 
             <br>
-            <div class="col-12 nadpis">Majitel:</div>
+            <div class="col-12 textOrange">Majitel:</div>
             <div class="col-12">Rudolf Zelený,</div>
             <div class="col-12">rudolf.zeleny@gmail.com</div> 
         </div>
@@ -28,7 +27,6 @@
     </div>
     <div class="col-12 text-md-left text-center popis">
         <br>
-
         <div ng-repeat="item in obsah" class="text-justify">
             <br>
             <div ng-if = "item.id_obsah != editing">

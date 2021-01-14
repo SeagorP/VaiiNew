@@ -1,3 +1,11 @@
 body {
     background-image: url("Styles/background.png");
 }
+
+.textBlue {
+    color: #00247d;
+}
+
+.textOrange {
+    color: #fc741c;
+}
