@@ -9,7 +9,7 @@ div.info {
 div.tvorca {
     font-weight: bold;
     color: #00247d;
-    padding: 3px;
+    /*padding: 3px;*/
     border-top: 2px solid #fc741c;
 }
 

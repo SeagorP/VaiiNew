@@ -1,0 +1,20 @@
+img.obrSluz {
+    width: 100%;
+}
+div.prvokSluzby {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin: auto;
+}
+
+div.prvokNadpis {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+i.more:hover {
+    cursor: pointer;
+}

@@ -24,14 +24,6 @@ a.butPrihlasit:hover {
     background-color:  #db7b3b;
 }
 
-div.loginText {
-    margin: auto; 
-}
-
-.loginText {
-    color: #00247d;
-}
-
 .error {
     color: red;
 }
