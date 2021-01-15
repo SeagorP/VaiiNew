@@ -27,3 +27,7 @@ a.butPrihlasit:hover {
 .error {
     color: red;
 }
+
+div.loginText {
+    margin: auto;
+}
