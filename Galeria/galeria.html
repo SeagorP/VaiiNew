@@ -1,20 +1,16 @@
-<div class="row text-center galeria">
+<div class="row text-center galeria" ng-controller="imgCTRL">
+    
+    <div class="col-12"> 
+        <input id="uploadfile" type="file" name="uploadfile" accept="image/x-png,image/gif,image/jpeg" value="" multiple> 
+        <button ng-click="nahrajObrazok()"> Submit</button>
+        <button ng-click="refreshImg()"> Obnov obrázky</button>
+    </div>
 
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
+    <div ng-repeat="image in obsah" class="obrGal col-md-3 col-sm-6 col-12">
+        <a href="Styles/Galery/{{image.meno}}">
+            <img class="col-12" ng-src="Styles/Galery/{{image.meno}}" src="Styles/test.jpg" alt="Obrazok v galerii">
+        </a>
 
-
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-
-
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-    <div class="obrGal col-md-3 col-sm-6 col-12"><a href="Styles/test.jpg"><img src="Styles/test.jpg" alt="Obrazok v galerii"></a></div>
-
+        <h2><i ng-click="zmazObrazok(image)" class="fas fa-trash-alt icon"></i></h2>
+    </div>
 </div>

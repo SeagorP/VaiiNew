@@ -68,6 +68,56 @@
             $sql->execute();
 
             return $this->db->lastInsertId();
+        }
+
+        function pridajObrazok($imgName, $image) {
+            if (isset($_POST["image"])) {
+                $sql = $this->db->prepare("SELECT * FROM image WHERE meno like :meno;");
+                $sql->bindValue(":meno", $imgName);
+                $sql->execute();
+                
+                if ($sql->rowCount() != 0) {
+                    return "uz existuje";
+                }
+
+                $sql = $this->db->prepare("INSERT INTO image VALUES (NULL, :meno);");
+                $sql->bindValue(":meno", $imgName);
+                $sql->execute();
+                file_put_contents('../Styles/Galery/'.$imgName, base64_decode($image));
+                return "ok";
+            }
+            return "nie ok";
+        }
+
+        function nacitajObrazkyGal() {
+            $sql = $this->db->prepare("SELECT * FROM image");
+            $sql->execute();
+            $data = [];
+
+            while($row = $sql->fetch(PDO::FETCH_ASSOC))
+            {
+                $data[] = $row;
+            }
+            return $data;
+        } 
+
+        function zmazObrazokGal($id) {
+            $sql = $this->db->prepare("SELECT meno FROM image where id_img = :id");
+            $sql->bindValue(":id", $id);
+            $sql->execute();
+
+            $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+
+            unlink('../Styles/Galery/'.$row["meno"]);
+
+            $sql = $this->db->prepare("DELETE FROM image where id_img = :id");
+            $sql->bindValue(":id", $id);
+            $sql->execute();
+
+           
+
+            return $sql->rowCount();
         } 
     }
 ?>

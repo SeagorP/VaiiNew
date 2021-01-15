@@ -1,0 +1,30 @@
+div.uvod {
+    /*background-image: linear-gradient(#00247d, rgb(0, 6, 85));*/
+    background-color: white;
+    margin:auto;
+    color: #00247d;
+    border-bottom: solid #fc741c 30px;
+}
+
+a.buttInText {
+    text-decoration: none;
+    color: #fc741c;
+}
+
+a.buttInText:hover {
+    color: #00247d;
+    font-weight: bold;
+}
+.oranPodciark {
+    border-bottom: solid #00247d 2px;
+}
+
+div.homeText {
+    margin: auto;
+}
+
+img.homeObrazok {
+    border: solid #fc741c 4px;
+    border-radius: 30%;
+}
+
