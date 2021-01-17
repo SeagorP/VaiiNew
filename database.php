@@ -19,7 +19,7 @@
 
         ///LOGIN
         function login($meno, $heslo) {
-            $sql = $this->db->prepare("SELECT * FROM user WHERE meno like :meno and heslo like :heslo");
+            $sql = $this->db->prepare("SELECT id, meno, email, prava FROM user WHERE meno like :meno and heslo like :heslo");
             $sql->bindValue(":meno", $meno);
             $sql->bindValue(":heslo", $heslo);
             $sql->execute();
@@ -117,10 +117,39 @@
             return $data;
         }
         function zmazSluzbu($id) {
+            $sql = $this->db->prepare("DELETE FROM chat where id_obsah = :id");
+            $sql->bindValue(":id", $id);
+            $sql->execute();
+
             $this->deleteImage($id, false);
             $this->zmazObsahKontakt($id);
         }
 
+        //Chat
+        
+        function nacitajChat($id) {
+            $sql = $this->db->prepare("SELECT meno, textSpravy, date FROM chat JOIN user USING(meno) JOIN obsah USING(id_obsah) WHERE :id = id_obsah ORDER BY date ASC");
+            $sql->bindValue(":id", $id);
+            $sql->execute();
+            $data = [];
+
+            while($row = $sql->fetch(PDO::FETCH_ASSOC))
+            {
+                $data[] = $row;
+            }
+            return $data;
+        }
+
+        function posliSpravu($text, $meno, $id) {
+            $sql = $this->db->prepare("INSERT INTO chat VALUES (NULL, :meno, :idObsah, :sprava, NULL);");
+            $sql->bindValue(":meno", $meno);
+            $sql->bindValue(":idObsah", $id);
+            $sql->bindValue(":sprava", $text);
+            $sql->execute();
+
+            return $this->db->lastInsertId();
+
+        }
 
         //Spolocne
         function addImage($imgName, $image, $id) {

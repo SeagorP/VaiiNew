@@ -17,6 +17,7 @@ udCTRL = function($scope, prihlUzivatel) {
     $scope.odhlasenie = function() {
         console.log($scope.uzivatel);
         prihlUzivatel.set(null);
+        alert("Uspešne ste sa odhlásili.");
     }
 }
 

@@ -17,7 +17,6 @@ kontCTRL = function($scope, $http, prihlUzivatel) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(value) {
             $scope.obsah = value.data;
-            console.log(value);
         });
     }
     $scope.nacitajData();
@@ -36,7 +35,6 @@ kontCTRL = function($scope, $http, prihlUzivatel) {
                 data: $scope.pdata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function(value) {
-                console.log(value);
                 angular.forEach($scope.obsah, function(item, idx) {
                     if (item == prvok) {
                         $scope.obsah.splice(idx, 1);
@@ -71,7 +69,6 @@ kontCTRL = function($scope, $http, prihlUzivatel) {
             data: $scope.pdata,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(value) {
-            console.log(value);
             $scope.editing = -1;
             if(value.data == 1) {
                 alert("Prvok bol upravený!!");

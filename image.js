@@ -1,10 +1,12 @@
-imgCTRL = function ($scope, $http, prihlUzivatel) {
+imgCTRL = function ($scope, $http, prihlUzivatel, $timeout, $interval) {
     $scope.uzivatel = prihlUzivatel;
     $scope.nameImg = [];
     $scope.tempI = 0;
     $scope.obsah = null;
     $scope.serObsah = null;
     $scope.aktServ = -1;
+    $scope.chat = [];
+    $scope.Timer;
 
     $scope.servNameImg;
 
@@ -86,13 +88,6 @@ imgCTRL = function ($scope, $http, prihlUzivatel) {
     }
 
     //SLUZBY
-    $scope.otvorServ = function(service) {
-        $scope.aktServ = service.id_obsah;
-    }
-
-    $scope.zatvorServ = function() {
-        $scope.aktServ = -1;
-    }
 
     $scope.nacitajServ = function() {
         $http({
@@ -134,6 +129,8 @@ imgCTRL = function ($scope, $http, prihlUzivatel) {
             if (value.data == - 1) {
                 alert("Sluzbu sa nepodarilo vložiť !");
             }
+            $("#nadpisServ").val('');
+            $("#textServ").val('');
             $scope.refresh();
         }, function() { });
     }
@@ -157,11 +154,75 @@ imgCTRL = function ($scope, $http, prihlUzivatel) {
                     }
                 });
             });
+        } 
+    }
+
+    //Komentare
+    $scope.otvorServ = function(service) {
+        $scope.aktServ = service.id_obsah;
+        //$scope.nacitajSpravy(service);
+
+        $scope.Timer = $interval(function(){
+            $scope.nacitajSpravy(service);
+        }, 1000);
+    }
+
+    $scope.zatvorServ = function() {
+        if (angular.isDefined($scope.Timer)) {
+            $interval.cancel($scope.Timer);
+        }
+        $scope.aktServ = -1;
+        $scope.chat = [];
+    }
+
+    $scope.nacitajSpravy = function(service) {
+        $scope.pdata = $.param({
+            id: service.id_obsah,
+        });
+        $http({
+            method: 'POST',
+            url: 'Sluzby/nacitajChat.php',
+            data: $scope.pdata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function(value) {
+            if ($scope.chat.length != value.data.length)
+            {
+                $scope.chat = value.data;  
+                $scope.scrollDown(service); 
+            }        
+        });
+    }
+
+    $scope.posliSpravu = function(sprava, service) {
+        if($scope.uzivatel.user != null && sprava != null) {
+            $scope.pdata = $.param({
+                text: sprava,
+                meno: $scope.uzivatel.user.meno,
+                id: service.id_obsah
+            });
+    
+            $http({
+                method: 'POST',
+                url: 'Sluzby/posliSpravu.php',
+                data: $scope.pdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function(value) {
+                $scope.chat.push({
+                    meno: $scope.uzivatel.user.meno,
+                    textSpravy: sprava,
+                });
+                $("#rozpisanaSprava").val('');
+                $scope.scrollDown(service);        
+            });
         }  
     }
 
-
-
+    $scope.scrollDown = function(service) {
+        $timeout(function(){
+            var chat = document.getElementById("chatScroll" + service.id_obsah);
+            chat.scrollTop =  chat.scrollHeight;
+        }, 100); 
+    }
 
     // Z Internetu
     function getBase64(image) {

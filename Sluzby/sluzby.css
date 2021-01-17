@@ -18,3 +18,9 @@ position: absolute;
 i.more:hover {
     cursor: pointer;
 }
+
+div.chat {
+    height: 300px;
+    border: solid gray 2px;
+    overflow: scroll;
+}
