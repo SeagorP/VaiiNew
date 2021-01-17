@@ -1,4 +1,6 @@
 hlavickaCTRL = function($scope, $sce, $compile, $templateRequest) {
+    $scope.uzivatel;
+
     $scope.zobrazHlavicku = function() {
         var loadAPI = $sce.getTrustedResourceUrl('Hlavicka/hlavicka.html');
         $templateRequest(loadAPI).then(function (result) {
@@ -8,4 +10,15 @@ hlavickaCTRL = function($scope, $sce, $compile, $templateRequest) {
     $scope.zobrazHlavicku();
 }
 
+
+udCTRL = function($scope, prihlUzivatel) {
+    $scope.uzivatel = prihlUzivatel;
+
+    $scope.odhlasenie = function() {
+        console.log($scope.uzivatel);
+        prihlUzivatel.set(null);
+    }
+}
+
+app.controller("udCTRL", udCTRL);
 app.controller("hlavickaCTRL", hlavickaCTRL);

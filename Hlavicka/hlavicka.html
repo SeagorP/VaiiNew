@@ -1,4 +1,4 @@
-<div class="container-fluid head">
+<div ng-controller="udCTRL" class="container-fluid head">
     <div class="row">
         <div class="col-md-3 col-sm-6 col-12 text-md-right text-center">
             <img class="logo" src="Styles/logo_small.png" alt="Logo firmy">
@@ -7,9 +7,13 @@
             Vitajte na stránkach firmy REMP s.r.o.
         </div>
         <div class="col-md-3 col-sm-6 col-12">
-            <div class="row text-center">
+            <div ng-if="uzivatel.user == null" class="row text-center">
                 <a class="col-12" class href="#!/login"><div class="prihlasenie"><i class="fas fa-portrait"></i>  Prihlásenie</div></a>
                 <a class="col-12 nemaUcet" href="#!/register">Ešte nemáte účet?</a>
+            </div>
+            <div ng-if="uzivatel.user != null" class="row text-center">
+                <div ng-click="odhlasenie()" class="prihlasenie col-12">  Odhlásenie</div>
+                <a class="col-12 nemaUcet">Stlačte pre odhlásenie</a>
             </div>
         </div>
     </div>

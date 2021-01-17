@@ -25,6 +25,7 @@ div.prihlasenie {
 }
 div.prihlasenie:hover {
     background: #0637b3;
+    cursor: pointer;
 }
 
 a.nemaUcet {

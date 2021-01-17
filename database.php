@@ -17,7 +17,7 @@
             $this->db = null;
         }
 
-
+        ///LOGIN
         function login($meno, $heslo) {
             $sql = $this->db->prepare("SELECT * FROM user WHERE meno like :meno and heslo like :heslo");
             $sql->bindValue(":meno", $meno);
@@ -32,8 +32,9 @@
             }
         }
 
+        ///Správa kontakt
         function nacitajObsahKontakt() {
-            $sql = $this->db->prepare("SELECT * FROM obsah");
+            $sql = $this->db->prepare("SELECT id_obsah, popis, text FROM obsah WHERE id_obsah != ANY (SELECT id_obsah FROM image)");
             $sql->execute();
             $data = [];
 
@@ -69,28 +70,14 @@
 
             return $this->db->lastInsertId();
         }
-
+        
+        ///Galeria    
         function pridajObrazok($imgName, $image) {
-            if (isset($_POST["image"])) {
-                $sql = $this->db->prepare("SELECT * FROM image WHERE meno like :meno;");
-                $sql->bindValue(":meno", $imgName);
-                $sql->execute();
-                
-                if ($sql->rowCount() != 0) {
-                    return "uz existuje";
-                }
-
-                $sql = $this->db->prepare("INSERT INTO image VALUES (NULL, :meno);");
-                $sql->bindValue(":meno", $imgName);
-                $sql->execute();
-                file_put_contents('../Styles/Galery/'.$imgName, base64_decode($image));
-                return "ok";
-            }
-            return "nie ok";
+            return $this->addImage($imgName, $image, -1);
         }
 
         function nacitajObrazkyGal() {
-            $sql = $this->db->prepare("SELECT * FROM image");
+            $sql = $this->db->prepare("SELECT * FROM image WHERE id_obsah IS NULL");
             $sql->execute();
             $data = [];
 
@@ -102,22 +89,88 @@
         } 
 
         function zmazObrazokGal($id) {
-            $sql = $this->db->prepare("SELECT meno FROM image where id_img = :id");
-            $sql->bindValue(":id", $id);
+            return $this->deleteImage($id, true);
+        }
+
+        ///Sluzby 
+        function pridajSluzbu($imgName, $image, $nazov, $text) {
+            if (isset($_POST["imgName"]) && isset($_POST["image"]) && isset($_POST["nazov"]) && isset($_POST["text"]))
+            {
+                $tempId = $this->pridajObsah($nazov, $text);
+                if($this->addImage($imgName, $image, $tempId) == -1) {
+                    $this->zmazObsahKontakt($tempId);
+                    return -1;
+                }
+                return 1;
+            } 
+            return -1;
+        }
+        function nacitajSluzbu() {
+            $sql = $this->db->prepare("SELECT * FROM obsah JOIN image USING(id_obsah)");
             $sql->execute();
+            $data = [];
 
+            while($row = $sql->fetch(PDO::FETCH_ASSOC))
+            {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        function zmazSluzbu($id) {
+            $this->deleteImage($id, false);
+            $this->zmazObsahKontakt($id);
+        }
+
+
+        //Spolocne
+        function addImage($imgName, $image, $id) {
+            if (isset($_POST["image"])) {
+                $sql = $this->db->prepare("SELECT * FROM image WHERE meno like :meno;");
+                $sql->bindValue(":meno", $imgName);
+                $sql->execute();
+                
+                if ($sql->rowCount() != 0) {
+                    return -1;
+                }
+
+                if($id == -1) {
+                    $sql = $this->db->prepare("INSERT INTO image VALUES (NULL, NULL, :meno);");
+                    $sql->bindValue(":meno", $imgName);
+                } else {
+                    $sql = $this->db->prepare("INSERT INTO image VALUES (NULL, :obsahId, :meno);");
+                    $sql->bindValue(":meno", $imgName);
+                    $sql->bindValue(":obsahId", $id);
+                } 
+                $sql->execute();
+                file_put_contents('../Styles/Galery/'.$imgName, base64_decode($image));
+                return 1;
+            }
+            return -1;
+        }
+
+        function deleteImage($id, $podlaCoho) {
+            if ($podlaCoho) {
+                $sql = $this->db->prepare("SELECT meno FROM image where id_img = :id");
+                $sql->bindValue(":id", $id);
+            } else {
+                $sql = $this->db->prepare("SELECT meno FROM image where id_obsah = :id");
+                $sql->bindValue(":id", $id);
+            }
+            
+            $sql->execute();
             $row = $sql->fetch(PDO::FETCH_ASSOC);
-
-
             unlink('../Styles/Galery/'.$row["meno"]);
 
-            $sql = $this->db->prepare("DELETE FROM image where id_img = :id");
-            $sql->bindValue(":id", $id);
+            if ($podlaCoho) {
+                $sql = $this->db->prepare("DELETE FROM image where id_img = :id");
+                $sql->bindValue(":id", $id);
+            } else {
+                $sql = $this->db->prepare("DELETE FROM image where id_obsah = :id");
+                $sql->bindValue(":id", $id);
+            }
+    
             $sql->execute();
-
-           
-
             return $sql->rowCount();
-        } 
+        }
     }
 ?>

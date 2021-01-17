@@ -23,4 +23,15 @@ pages = function($routeProvider) {
     });
 }
 
+prihlUzivatel = function() {
+    return {
+        user: angular.fromJson(sessionStorage.user),
+        set: function(uzivatel) {
+            this.user = uzivatel;
+            sessionStorage.user = angular.toJson(this.user);
+        }
+    }
+}
+
+app.factory("prihlUzivatel", prihlUzivatel);
 app.config(pages);
