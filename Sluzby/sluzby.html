@@ -6,13 +6,12 @@
         </div>
 
         <div class="row">
-            <input class="col-12" ng-model = "nazov">
-            <textarea rows="5" class="col-12" ng-model = "text"></textarea>
+            <input id="nadpisServ" class="col-12" ng-model = "nazov" placeholder="Klikni pre napísanie názvu.">
+            <textarea id="textServ"rows="5" class="col-12" ng-model = "text" placeholder="Klikni pre napísanie obsahu."></textarea>
         </div>
     </div>
 
     <div class="row text-center sluzby text-center">
-        
         <div ng-repeat="service in serObsah" ng-if="aktServ == service.id_obsah || aktServ == -1" class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
             <div class="col-12">
                 <img class="obrSluz" ng-src="Styles/Galery/{{service.meno}}" src="Styles/test.jpg" alt="Obrazok v sluzbach">
@@ -22,10 +21,24 @@
                 {{service.text}}
                 <br>
                 <h2 class="text-right">
-                    <i ng-click="otvorServ(service)" class="fas fa-question more"></i>
+                    <i ng-if="aktServ == -1 && uzivatel.user != null" ng-click="otvorServ(service)" class="fas fa-question more"></i>
+                    <i ng-if="aktServ != -1" ng-click="zatvorServ()" class="fas fa-question more"></i>
                     <i ng-if="uzivatel.user.prava == 1" ng-click="zmazServ(service)" class="fas fa-times"></i>
                 </h2>
+                <a ng-if="aktServ == -1 && uzivatel.user == null" href="#!/login">Komentovat</a>
+            </div>
+            <div class="col-12 text-left" id="chat" ng-if="aktServ != -1">
+                <h3 class="col-12">Komentáre</h3>
+                <div class="col-12 chat" id="chatScroll{{service.id_obsah}}">
+                    <div ng-repeat="sprava in chat" class="row">
+                        <div class="col-3"><h5>{{ sprava.meno }}:</h5></div>
+                        <div class="col-9">{{ sprava.textSpravy }}</div>
+                    </div>
+                </div>
+                <textarea id="rozpisanaSprava" class="col-12" placeholder="Klikni pre napísanie správy." required minlength="1" ng-model = "sprava"></textarea>
+                <button ng-click="posliSpravu(sprava, service)" class="col-4">Send</button>
             </div>
         </div>
     </div>
+
 </div>

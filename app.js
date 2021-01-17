@@ -1,6 +1,5 @@
 var app = angular.module("mojWeb", ["ngRoute"]);
 
-
 pages = function($routeProvider) {
     $routeProvider
     .when("/", {
