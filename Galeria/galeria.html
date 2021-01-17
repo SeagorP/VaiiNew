@@ -1,9 +1,8 @@
 <div class="row text-center galeria" ng-controller="imgCTRL">
     
-    <div class="col-12"> 
+    <div ng-if="uzivatel.user.prava == 1" class="col-12"> 
         <input id="uploadfile" type="file" name="uploadfile" accept="image/x-png,image/gif,image/jpeg" value="" multiple> 
-        <button ng-click="nahrajObrazok()"> Submit</button>
-        <button ng-click="refreshImg()"> Obnov obrázky</button>
+        <button ng-click="nahrajObrazok()"> Pridaj</button>
     </div>
 
     <div ng-repeat="image in obsah" class="obrGal col-md-3 col-sm-6 col-12">
@@ -11,6 +10,6 @@
             <img class="col-12" ng-src="Styles/Galery/{{image.meno}}" src="Styles/test.jpg" alt="Obrazok v galerii">
         </a>
 
-        <h2><i ng-click="zmazObrazok(image)" class="fas fa-trash-alt icon"></i></h2>
+        <h2><i ng-if="uzivatel.user.prava == 1" ng-click="zmazObrazok(image)" class="fas fa-trash-alt icon"></i></h2>
     </div>
 </div>

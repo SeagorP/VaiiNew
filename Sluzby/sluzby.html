@@ -1,88 +1,31 @@
-<div class="row text-center sluzby text-center">
-
-    <div class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
-        <div class="col-12">
-            <img class="obrSluz" src="Styles/test.jpg" alt="Obrazok v sluzbach">
-            <div class="prvokNadpis"><h1>Nadpis</h1></div>
+<div ng-controller="imgCTRL">
+    <div ng-if="uzivatel.user.prava == 1"> 
+        <div class="col-12" > 
+            <input id="uploadService" type="file" name="uploadService" accept="image/x-png,image/gif,image/jpeg" value=""> 
+            <button ng-click="nahrajSluzbu(nazov, text)"> Pridaj</button>
         </div>
-        <div class="col-12 textBlue text-justify">
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi quis nostrud exercitation ullamco laboris nisi 
-            <br>
-            <h2 class="text-right">
-                <i class="fas fa-question more"></i>
-                <i class="fas fa-times"></i>
-            </h2>
+        <div class="row">
+            <input class="col-12" ng-model = "nazov">
+            <textarea rows="5" class="col-12" ng-model = "text"></textarea>
         </div>
     </div>
 
-    <div class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
-        <div class="col-12">
-            <img class="obrSluz" src="Styles/test.jpg" alt="Obrazok v sluzbach">
-            <div class="prvokNadpis"><h1>Nadpis</h1></div>
-        </div>
-        <div class="col-12 textBlue text-justify">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi quis nostrud exercitation ullamco laboris nisi 
-            <br>
-            <h2 class="text-right">
-                <i class="fas fa-question more"></i>
-                <i class="fas fa-times"></i>
-            </h2>
-        </div>
-    </div>
-
-    <div class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
-        <div class="col-12">
-            <img class="obrSluz" src="Styles/test.jpg" alt="Obrazok v sluzbach">
-            <div class="prvokNadpis"><h1>Nadpis</h1></div>
-        </div>
-        <div class="col-12 textBlue text-justify">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi quis nostrud exercitation ullamco laboris nisi 
-            <br>
-            <h2 class="text-right">
-                <i class="fas fa-question more"></i>
-                <i class="fas fa-times"></i>
-            </h2>
+    <div class="row text-center sluzby text-center">
+        
+        <div ng-repeat="service in serObsah" ng-if="aktServ == service.id_obsah || aktServ == -1" class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
+            <div class="col-12">
+                <img class="obrSluz" ng-src="Styles/Galery/{{service.meno}}" src="Styles/test.jpg" alt="Obrazok v sluzbach">
+                <div class="prvokNadpis"><h1>{{service.popis}}</h1></div>
+            </div>
+            <div class="col-12 textBlue text-justify">
+                {{service.text}}
+                <br>
+                <h2 class="text-right">
+                    <i ng-click="otvorServ(service)" class="fas fa-question more"></i>
+                    <i ng-if="uzivatel.user.prava == 1" ng-click="zmazServ(service)" class="fas fa-times"></i>
+                </h2>
+            </div>
         </div>
     </div>
-
-    <div class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
-        <div class="col-12">
-            <img class="obrSluz" src="Styles/test.jpg" alt="Obrazok v sluzbach">
-            <div class="prvokNadpis"><h1>Nadpis</h1></div>
-        </div>
-        <div class="col-12 textBlue text-justify">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi quis nostrud exercitation ullamco laboris nisi 
-            <br>
-            <h2 class="text-right">
-                <i class="fas fa-question more"></i>
-                <i class="fas fa-times"></i>
-            </h2>
-        </div>
-    </div>
-
-    <div class="prvokSluzby text-center col-md-4 col-sm-6 col-12 row">
-        <div class="col-12">
-            <img class="obrSluz" src="Styles/test.jpg" alt="Obrazok v sluzbach">
-            <div class="prvokNadpis"><h1>Nadpis</h1></div>
-        </div>
-        <div class="col-12 textBlue text-justify">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi quis nostrud exercitation ullamco laboris nisi 
-            <br>
-            <h2 class="text-right">
-                <i class="fas fa-question more"></i>
-                <i class="fas fa-times"></i>
-            </h2>
-        </div>
-    </div>
-
 </div>

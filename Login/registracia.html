@@ -1,6 +1,6 @@
 <div ng-controller="regCTRL" class="row">
     <h1 class="col-12 text-center textBlue"> Registrácia </h1>
-    <div class="text-center col-md-3 col-sm-6 col-10 login">
+    <div ng-if="uzivatel.user == null" class="text-center col-md-3 col-sm-6 col-10 login">
         <div class="col-12">Uživatelské meno:</div>
         <input class="name text-center" type="text" ng-model="name" required minlength="4" maxlength="16"><br>
         <div class="col-12">Heslo:</div>
@@ -16,6 +16,8 @@
         <br>
         <h5><a ng-click="klikRegistracia()" class="butPrihlasit">Registrovať</a></h5>
     </div>
+
+    <h3 ng-if="uzivatel.user != null" class="col-12 text-center textBlue"> Ste prihlásený </h3>
 
     <div class="col-sm-10 col-11 text-justify textBlue loginText">
         <h1>Licenčné podmienky</h1>

@@ -1,16 +1,14 @@
-regCTRL = function($scope, $http) {
-    $scope.uzivatel = angular.fromJson(sessionStorage.uzivatel);
+regCTRL = function($scope, $http, prihlUzivatel) {
+    $scope.uzivatel;
     $scope.zobrazEror = false;
+    $scope.uzivatel = prihlUzivatel;
 
-    $scope.klikPrihlasit = function() {
-        console.log($scope.name);
-        console.log($scope.password);
 
+    $scope.klikPrihlasit = function(name, password) {
         $scope.pdata = $.param({
-            meno: $scope.name,
-            heslo: $scope.password,
+            meno: name,
+            heslo: password,
         });
-
         $http({
             method: 'POST',
             url: 'Login/prihlasit.php',
@@ -20,10 +18,8 @@ regCTRL = function($scope, $http) {
             if (value.data == null) {
                 $scope.zobrazEror = true;
             } else {
-                $scope.uzivatel = value.data;
-                sessionStorage.uzivatel = angular.toJson($scope.uzivatel);
                 $scope.zobrazEror = false;
-                console.log(value);
+                prihlUzivatel.set(value.data);
             }
         });
     }

@@ -1,4 +1,5 @@
-kontCTRL = function($scope, $http) {
+kontCTRL = function($scope, $http, prihlUzivatel) {
+    $scope.uzivatel = prihlUzivatel;
     $scope.editing = -1;
     $scope.obsah = null;
     $scope.add = false;
