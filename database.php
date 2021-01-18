@@ -19,10 +19,26 @@
 
         ///LOGIN
         function login($meno, $heslo) {
-            $sql = $this->db->prepare("SELECT id, meno, email, prava FROM user WHERE meno like :meno and heslo like :heslo");
+            $sql = $this->db->prepare("SELECT * FROM user WHERE meno like :meno");
             $sql->bindValue(":meno", $meno);
-            $sql->bindValue(":heslo", $heslo);
             $sql->execute();
+
+            if($sql->rowCount() > 0) {
+                $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+                $newHeslo = hash('sha256', $heslo.$result["salt"]);
+                if($result["heslo"] == $newHeslo) {
+                    $result["heslo"] = "";
+                    $result["salt"] = "";
+                    return $result;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+
+            
 
             if($sql->rowCount() > 0) {
                 $result = $sql->fetch(PDO::FETCH_ASSOC);
@@ -32,9 +48,47 @@
             }
         }
 
+        function register($meno, $heslo, $email) {
+            $sql = $this->db->prepare("SELECT id FROM user WHERE meno like :meno");
+            $sql->bindValue(":meno", $meno);
+            $sql->execute();
+            if($sql->rowCount() != 0) {
+                return -1;
+            }
+
+            $sql = $this->db->prepare("SELECT email FROM user WHERE email like :email");
+            $sql->bindValue(":email", $email);
+            $sql->execute();
+            if($sql->rowCount() != 0) {
+                return -2;
+            }
+
+            $sql = $this->db->prepare("INSERT INTO user VALUES (NULL, :meno, :heslo, :salt, :email, 0,NULL)");
+            $sql->bindValue(":meno", $meno);
+            //$tempheslo = password_hash($heslo, PASSWORD_DEFAULT);
+            $addRandomString = $this->generateRandomString(32);
+            $newHeslo = hash('sha256', $heslo.$addRandomString);
+            $sql->bindValue(":heslo", $newHeslo);
+            $sql->bindValue(":salt", $addRandomString);
+            $sql->bindValue(":email", $email);
+            $sql->execute();
+            return $this->db->lastInsertId();
+        }
+
+        //z internetu
+        function generateRandomString($length = 10) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
+
         ///Správa kontakt
         function nacitajObsahKontakt() {
-            $sql = $this->db->prepare("SELECT id_obsah, popis, text FROM obsah WHERE id_obsah != ANY (SELECT id_obsah FROM image)");
+            $sql = $this->db->prepare("SELECT OB.id_obsah, OB.popis, OB.text FROM obsah AS OB WHERE NOT EXISTS (SELECT IMG.id_obsah FROM image AS IMG WHERE OB.id_obsah = IMG.id_obsah)");
             $sql->execute();
             $data = [];
 
